@@ -12,7 +12,7 @@ class Box {
     posY = 0;
     posZ = 0;
     passes = 0;
-    movement = 3;
+    movement = 0;
     constructor(x, y) {
         this.x = x;
         this.y = y
@@ -34,6 +34,7 @@ class Box {
     increasePasses() {
         this.passes += 1
         if (this.passes % 5 === 0) {
+            if (this.movement === 5) console.log(frameCount)
             this.movement = (this.movement + 1) % 6;
         }
     }
@@ -42,9 +43,9 @@ class Box {
         this.posX = map(sin(this.x), -1, 1, -50, 50)
         this.posY = map(sin(this.y), -1, 1, -50, 50)
         this.posZ = map(sin(this.z), -1, 1, -50, 50)
-        this.rotX = map(sin(this.xR), -1, 1, -90, 90)
-        this.rotY = map(sin(this.yR), -1, 1, -90, 90)
-        this.rotZ = map(sin(this.zR), -1, 1, -90, 90)
+        this.rotX = map(sin(this.xR), -1, 1, -45, 45)
+        this.rotY = map(sin(this.yR), -1, 1, -45, 45)
+        this.rotZ = map(sin(this.zR), -1, 1, -45, 45)
         translate(this.posX, this.posY, this.posZ);
         rotateX(this.rotX * 1);
         rotateY(this.rotY * 1)
@@ -60,13 +61,13 @@ class Box {
 
         switch (this.movement) {
             case 5:
-                this.yR += 2
+                this.yR += 4
                 break;
             case 4:
-                this.zR += 2
+                this.zR += 4
                 break;
             case 3:
-                this.xR += 2;
+                this.xR += 4;
                 break;
             case 2:
                 this.y += 4;
@@ -81,6 +82,5 @@ class Box {
 
         }
     }
-
 
 }
