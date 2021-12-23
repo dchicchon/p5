@@ -5,10 +5,13 @@ const { innerWidth, innerHeight } = window
 let y = 0;
 let arr = [];
 let index = 0;
-
+const length = 1
 // make 8 boxes that make 1 box total
 
-const boxBreaker = new BoxBreaker();
+for (let i = 0; i < length; i++) {
+    const boxBreaker = new BoxBreaker(i * 200, 0);
+    arr.push(boxBreaker)
+}
 
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL)
@@ -19,7 +22,7 @@ function draw() {
     rotateY(PI / 4)
     background(0);
     stroke(0);
-    rotateY(y)
-    boxBreaker.move()
-    y += 0.01
+    for (const breaker of arr) {
+        breaker.move();
+    }
 }

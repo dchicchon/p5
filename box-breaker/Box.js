@@ -5,9 +5,12 @@ class Box {
     xPos = 0
     yPos = 0
     zPos = 0
-    initialX = 0;
-    initialY = 0;
-    initialZ = 0;
+    xInitial = 0;
+    yInitial = 0;
+    zInitial = 0;
+    xDist = 0;
+    yDist = 0;
+    zDist = 0;
     size = 0
     offset = 0
     movement = 0
@@ -20,26 +23,56 @@ class Box {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.initialX = x * this.offset
-        this.initialY = y * this.offset
-        this.initialZ = z * this.offset
-        this.xPos = this.initialX
-        this.yPos = this.initialY
-        this.zPos = this.initialZ
+        this.xInitial = x * this.offset
+        this.yInitial = y * this.offset
+        this.zInitial = z * this.offset
+        this.xPos = this.xInitial
+        this.yPos = this.yInitial
+        this.zPos = this.zInitial
+        this.xDist = this.x * this.size;
+        this.yDist = this.y * this.size;
+        this.zDist = this.z * this.size;
+
     }
 
-    setup() {
+
+    checkIfCenter() {
+        return Math.abs(this.xPos - this.xInitial) < 0.08 && Math.abs(this.yPos - this.yInitial) < 0.08 && Math.abs(this.zPos - this.zInitial) < 0.08
     }
 
-    move() {
+    checkIfOut() {
+        return Math.abs(this.xPos - this.xDist) < 0.1 && Math.abs(this.yPos - this.yDist) < 0.1 && Math.abs(this.zPos - this.zDist) < 0.1
+    }
+    // sets new position while moving
+    move(moving) {
+        if (moving) {
+            const speed = 0.05 * this.movement
+            this.xPos = map(sin(speed), -1, 1, this.xInitial, this.xDist)
+            this.yPos = map(sin(speed), -1, 1, this.yInitial, this.yDist)
+            this.zPos = map(sin(speed), -1, 1, this.zInitial, this.zDist)
+            this.movement += 1
+        } else {
+            // i want it to finish moving before stopping
+            // how to check if a x is close to y
+            if (this.checkIfOut()) {
+            } else if (this.checkIfCenter()) {
+            } else {
+                const speed = 0.05 * this.movement
+                this.xPos = map(sin(speed), -1, 1, this.xInitial, this.xDist)
+                this.yPos = map(sin(speed), -1, 1, this.yInitial, this.yDist)
+                this.zPos = map(sin(speed), -1, 1, this.zInitial, this.zDist)
+                this.movement += 1
+            }
+
+        }
+    }
+
+    // draws to page
+    draw() {
         push()
-        fill(this.color);
         translate(this.xPos, this.yPos, this.zPos)
-        this.xPos = map(sin(this.movement), -1, 1, this.initialX, this.size * this.x)
-        this.yPos = map(sin(this.movement), -1, 1, this.initialY, this.size * this.y)
-        this.zPos = map(sin(this.movement), -1, 1, this.initialZ, this.size * this.z)
+        fill(this.color);
         box(this.size);
         pop()
-        this.movement += 0.05
     }
 }
