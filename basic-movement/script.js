@@ -1,7 +1,6 @@
 let isRecording = false;
 let firstFrame = 226;
 let lastFrame = 496;
-// let lastFrame = 1981;
 const width = window.innerWidth
 const height = window.innerHeight
 
