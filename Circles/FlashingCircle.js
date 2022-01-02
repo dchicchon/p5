@@ -31,7 +31,6 @@ class FlashingCircle {
         circle(this.xPos, this.yPos, this.size)
         this.iters += Math.random() * 0.3;
         if (this.phaseDone()) {
-            console.log("phase done")
             this.phases += 1
         }
         pop()
