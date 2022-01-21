@@ -32,12 +32,12 @@ function rgb(r, g, b) {
 
 
 function setup() {
-    canvasToRecord = createCanvas(width/ 2, height/1.025).canvas
+    canvasToRecord = createCanvas(width, height).canvas
     isRecording = true;
     frameRate(60);
 }
 
-let web1 = new Web(5, height / 15, height / 1.2)
+let web1 = new Web(width / 3, height/4, height /2)
 
 // let web2 = new Web(100, 100, height / 5)
 // let web3 = new Web(200, 200, height / 5)
@@ -64,7 +64,7 @@ web1.setup();
 
 
 function draw() {
-    recordGIF()
+    // recordGIF()
     // inside this shape, i want to add lines
     background(0);
     // noLoop()    
