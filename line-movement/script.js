@@ -1,9 +1,11 @@
 const width = window.innerWidth
 const height = window.innerHeight
+
 const size = 35;
+const numColors = 4;
+
 let rotY = 320;
 const rotateElm = document.getElementById('rotate')
-console.log(rotY)
 rotateElm.textContent = rotY
 const rotateInput = document.getElementById('rotateInput')
 rotateInput.onchange = function (e) {
@@ -16,7 +18,6 @@ function setup() {
     angleMode(DEGREES);
 }
 
-const colors = ['rgb(17,94,169)', 'rgb(67,237,18)', 'rgb(249,158,54)']
 let y = 0;
 function draw() {
     rotateX(-25);
@@ -27,7 +28,7 @@ function draw() {
         push();
         const yPos = map(sin(y + offset), -1, 1, -50, 50)
         translate((i * size) - width / 2, yPos)
-        fill(colors[i % 2])
+        fill(colors((i % numColors), 5))
         box(size);
         pop();
         offset += 15

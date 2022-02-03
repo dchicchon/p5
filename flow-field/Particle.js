@@ -23,46 +23,34 @@ class Particle {
         this.acc.add(force);
     }
 
-    updatePrev() {
-        this.prevPos.x = this.pos.x;
-        this.prevPos.y = this.pos.y;
-    }
-
     edges() {
         if (this.pos.x > width) {
             this.pos.x = 0;
-            this.updatePrev();
         }
         if (this.pos.x < 0) {
-            this.pos.x = width;
-            this.updatePrev();
+            this.pos.x = width - 1;
         }
         if (this.pos.y > height) {
             this.pos.y = 0;
-            this.updatePrev();
         }
         if (this.pos.y < 0) {
-            this.pos.y = height;
-            this.updatePrev();
+            this.pos.y = height - 1;
         }
     }
 
     follow(vectors) {
-        let x = floor(this.pos.x / scl)
-        let y = floor(this.pos.y / scl)
+        let x = floor(this.pos.x / scale)
+        let y = floor(this.pos.y / scale)
         let index = x + y * cols;
         let force = vectors[index];
         this.applyForce(force);
     }
 
     show() {
-        push()
-        strokeWeight(0.1);
-        stroke(0, 152, 145, 200);
-        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y)
-        // point(this.pos.x, this.pos.y)
-        pop()
-        this.updatePrev();
+        strokeWeight(size);
+        stroke('cyan'); // color
+        point(this.pos.x, this.pos.y)
+        // this.updatePrev();
     }
 
 }

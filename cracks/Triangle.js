@@ -14,7 +14,6 @@ class Triangle {
 
     draw(color) {
         noStroke()
-        // rotate(this.angle, 0)
         fill(color)
         if (this.type === 0) {
             triangle(this.xPos, this.yPos,

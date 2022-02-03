@@ -1,20 +1,8 @@
-const { innerWidth, innerHeight } = window
-
-// const width = 1000;
-// const height = 1000;
-let left_x = parseInt(innerWidth * -0.1)
-let right_x = parseInt(innerWidth * 1.1)
-let top_y = parseInt(innerHeight * -0.1);
-let bottom_y = parseInt(innerHeight * 1.1)
-// let width = right_x - left_x;
-// let height = bottom_y - top_y
-let width = innerWidth;
-let height = innerHeight
-
-// let resolution = parseInt(width * 0.01);
+const { innerWidth: width, innerHeight: height } = window
 
 let cols, rows;
-let scl = 10;
+const size = 10;
+const scale = 50; // chose scale based on your window size! If its running slow, increase the scale
 let inc = 0.1;
 
 let particles = []
@@ -22,27 +10,19 @@ let flowfield = []
 
 function setup() {
     createCanvas(width, height)
-
-    cols = floor(width / scl);
-    rows = floor(height / scl);
+    cols = floor(width / scale);
+    rows = floor(height / scale);
     flowfield = new Array(cols * rows);
     // create the particles here
     for (let i = 0; i < 500; i++) {
         let particle = new Particle();
         particles[i] = particle
     }
-    background(0);
-
 }
-
-// now we can make  a line follow the flow field
 
 let zOff = 0;
 function draw() {
-    // background(255);
-    // 
-    // make some lines and have them go across the screen
-
+    background(0);
     let yOff = 0;
     for (let y = 0; y < rows; y++) {
         let xOff = 0;
@@ -50,20 +30,18 @@ function draw() {
             let index = (x + y * cols);
             let angle = noise(xOff, yOff, zOff) * TWO_PI * 2;
             xOff += inc;
-            // let angle = (y / float(rows)) * PI;
             let v = p5.Vector.fromAngle(angle);
             flowfield[index] = v;
             v.setMag(0.5)
             stroke(0, 50);
             push();
-            translate(x * scl, y * scl);
+            translate(x * scale, y * scale);
             rotate(angle)
-            // line(0, 0, scl, 0)
             pop();
         }
         yOff += inc;
     }
-    zOff += 0.01
+    zOff += 0.005
 
     for (let i = 0; i < particles.length; i++) {
         // get position of particle;

@@ -20,14 +20,13 @@ class FlashingCircle {
         return this.opacity < 0.01 && this.iters !== 0;
     }
 
-    // push and pop dont work here
     draw() {
         push()
         this.opacity = Math.pow(sin(this.iters), 2) // maybe go up then down
         noFill();
         this.strokeWeight = map(Math.pow(sin(this.iters), 2), 0, 1, 1, 5)
         strokeWeight(this.strokeWeight);
-        stroke(`rgba(${this.color},${this.opacity})`) // change the opacity
+        stroke(this.color) // change the opacity
         circle(this.xPos, this.yPos, this.size)
         this.iters += Math.random() * 0.3;
         if (this.phaseDone()) {

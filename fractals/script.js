@@ -1,19 +1,18 @@
 let { innerWidth: width, innerHeight: height } = window;
 
 let grid = []
-let colors = ['cyan', 'orange', 'lightgreen', 'violet']
-let gridConstant = 10
-let gridPadding = 5
-let trailLength = 1000
-let timingPreference = 25
+const gridConstant = 10
+const gridPadding = 5
+const trailLength = 500
+const timingPreference = 10
 let numAcross;
 let numDown
 
 // have each particle move?
 function setup() {
     // background(0)
-    width += 100
-    height += 100
+    width += 200
+    height += 200
     createCanvas(width, height)
     numAcross = floor(width / gridConstant); // num of dots across
     numDown = floor(height / gridConstant) // num of dots down
@@ -26,38 +25,8 @@ function setup() {
             grid[i][j] = particle
         }
     }
-    // console.log(grid)
 }
 
-// async function draw() {
-//     noLoop();
-
-//     //  lets run a function test on this grid
-//     let num = 0
-//     for (let i = 0; i < numAcross; i++) {
-//         for (let j = 0; j < numDown - 1; j++) {
-//             // if where on the 3rd thing, do something
-//             if (i % 2 === 0 && j % 2 === 0) {
-//                 let startParticle = grid[i][j]
-//                 let middleParticle = grid[i + 1][j]
-//                 let endParticle = grid[i + 1][j + 1]
-//                 let color = colors[num % 3]
-//                 stroke(color)
-//                 strokeWeight(1)
-//                 line(startParticle.x, startParticle.y, middleParticle.x, middleParticle.y)
-//                 num++
-//                 color = colors[num % colors.length]
-//                 stroke(color)
-//                 line(middleParticle.x, middleParticle.y, endParticle.x, endParticle.y)
-//                 num++
-//                 color = colors[num % colors.length]
-//                 stroke(color)
-//                 line(endParticle.x, endParticle.y, startParticle.x, startParticle.y)
-
-//             }
-//         }
-//     }
-// }
 
 function movement(x, y) {
     // find movement!
@@ -79,12 +48,10 @@ function makeGrid() {
     pop()
 }
 
-async function createStuff(num) {
+async function createFractals(num) {
+    let color = colors(floor(random() * 6), 6)
     try {
-        if (num % 4 === 0) background(0)
-        // background(0)
-        // makeGrid()
-        // middle particle
+        if (num % 2 === 0) background(0)
         let x = floor(grid.length / 2.05)
         let y = floor(grid[0].length / 2.0)
         let currentParticle = grid[x][y]
@@ -133,7 +100,7 @@ async function createStuff(num) {
                 if (endIndex > 2) endIndex = 0
                 let end = points[endIndex]
                 await sleep(timingPreference)
-                stroke(colors[num % colors.length])
+                stroke(color)
                 line(start.x, start.y, end.x, end.y)
             }
             points = []
@@ -142,7 +109,7 @@ async function createStuff(num) {
     }
     finally {
         num++
-        createStuff(num)
+        createFractals(num)
     }
 
 }
@@ -153,14 +120,14 @@ function draw() {
     // makeGrid()
     let num = 0;
     // fade in and fade out with new designs!
-    createStuff(num)
+    createFractals(num)
 
     // start function that begins drawing triangles from the center
 }
 
 function mousePressed() {
     if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-      let fs = fullscreen();
-      fullscreen(!fs);
+        let fs = fullscreen();
+        fullscreen(!fs);
     }
-  }
+}

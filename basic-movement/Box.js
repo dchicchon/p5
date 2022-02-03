@@ -1,4 +1,8 @@
 class Box {
+
+    moveSpeed = 2;
+    rotateSpeed = 3;
+    distance = 100
     x = 0;
     y = 0;
     z = 0;
@@ -40,9 +44,9 @@ class Box {
     }
 
     move() {
-        this.posX = map(sin(this.x), -1, 1, -50, 50)
-        this.posY = map(sin(this.y), -1, 1, -50, 50)
-        this.posZ = map(sin(this.z), -1, 1, -50, 50)
+        this.posX = map(sin(this.x), -1, 1, -this.distance, this.distance)
+        this.posY = map(sin(this.y), -1, 1, -this.distance, this.distance)
+        this.posZ = map(sin(this.z), -1, 1, -this.distance, this.distance)
         this.rotX = map(sin(this.xR), -1, 1, -45, 45)
         this.rotY = map(sin(this.yR), -1, 1, -45, 45)
         this.rotZ = map(sin(this.zR), -1, 1, -45, 45)
@@ -61,22 +65,22 @@ class Box {
 
         switch (this.movement) {
             case 5:
-                this.yR += 4
+                this.yR += this.rotateSpeed
                 break;
             case 4:
-                this.zR += 4
+                this.zR += this.rotateSpeed
                 break;
             case 3:
-                this.xR += 4;
+                this.xR += this.rotateSpeed;
                 break;
             case 2:
-                this.y += 4;
+                this.y += this.moveSpeed;
                 break;
             case 1:
-                this.z += 4
+                this.z += this.moveSpeed
                 break;
             default:
-                this.x += 4
+                this.x += this.moveSpeed
                 break;
 
 

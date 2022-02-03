@@ -1,4 +1,3 @@
-let colors = ['rgba(0,255,255,0.5)', 'rgba(255,105,180,0.5)', 'rgba(255,255,255,0.5)']
 
 class Web {
     xPos = 0;
@@ -10,11 +9,6 @@ class Web {
         this.yPos = yPos;
         this.size = size;
     }
-
-    // return true if in bounds
-    // checkBounds(xPos, yPos) {
-    //     return xPos > this.xPos && xPos < this.xPos + this.size && yPos > this.yPos && yPos < this.yPos + this.size
-    // }
 
     checkXBounds(xPos) {
         return xPos >= this.xPos && xPos <= this.xPos + this.size
@@ -34,7 +28,7 @@ class Web {
 
     makeWalkingLine(index) {
         let side = Math.random() < 0.5 ? 0 : 1
-        let color = colors[index];
+        let color = colors(index, 6)
         // y is constant    
         if (side === 0) {
             let xStart = this.xPos + (Math.random() * this.size)
@@ -65,20 +59,7 @@ class Web {
             let yEnd = this.yPos + (Math.random() * this.size);
             line(this.xPos, yStart, this.xPos + this.size, yEnd)
         }
-        // along a random point of the bounding box, start a line, and
-        // end the line at some point along any other side
-        // line(this.xPos, this.yPos, this.xPos + this.size, this.yPos + this.size)
     }
-
-    // basic making of a web
-    // draw() {
-    //     stroke(255)
-    //     noFill();
-    //     rect(this.xPos, this.yPos, this.size, this.size) // within these bounds
-    //     for (let i = 0; i < 100; i += 1) {
-    //         this.makeLine();
-    //     }
-    // }
 
     // making walking lines
     draw() {
@@ -140,7 +121,6 @@ class Web {
                 }
             }
 
-            // this.makeLine();
         }
     }
 }

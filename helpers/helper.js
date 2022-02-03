@@ -18,8 +18,8 @@ function inBounds(x, y) {
 }
 
 // current num, end num
-function colors(currentNum, endNum, colorsToUse) {
-    let colors = ['cyan', 'violet', 'yellow', 'lightgreen', 'orange']
+function colors(currentNum, endNum) {
+    let colors = ['cyan', 'violet', 'white', 'lightgreen', 'orange', 'yellow',]
     if (endNum > colors.length) throw "Color function: end number is too long!"
     return colors[currentNum % endNum]
 }

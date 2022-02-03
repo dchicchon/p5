@@ -7,20 +7,16 @@ function setup() {
 
 
 let rotateNum = 0;
+const lineSize = 5
+const timingConstant = 25
 
-function draw() {
+async function makeSpiral() {
     background(0);
     stroke('yellow')
-    strokeWeight(10)
-    // we want this line to wrap itself like a snake 
-    // we can make a line loop by keeping track of the previous xPos and yPos
-    // columns
-
-
+    strokeWeight(lineSize)
     let xPos = 0
     let yPos = 0
     let mainMagnitude = 25;
-
     // go right,up,left,down
     let multiplier = 1
     let xNext = 0
@@ -28,8 +24,6 @@ function draw() {
     let xMagnitude = 0;
     let yMagnitude = 0;
 
-    translate(innerWidth / 2, innerHeight / 2)
-    // rotate(-rotateNum)
     // make initial line 
     xNext = xPos + mainMagnitude;
     yNext = yPos;
@@ -39,8 +33,6 @@ function draw() {
 
     for (let i = 0; i < 64; i += 1) {
         let vector = i % 4;
-        console.log('Index', i)
-        console.log('Vector', vector)
 
         if (vector === 3) {
             multiplier += 1
@@ -51,7 +43,6 @@ function draw() {
             xMagnitude = 25 * multiplier;
             yMagnitude = 25 * multiplier;
         }
-        console.log('Multiplier', multiplier)
 
         // if 3, increase multiplier for xMagnitude by 1,
         // if 0, increase multiplier for yMagnitude by 1
@@ -81,7 +72,13 @@ function draw() {
         line(xPos, yPos, xNext, yNext)
         xPos = xNext;
         yPos = yNext
+        await sleep(timingConstant)
     }
+    makeSpiral()
+}
 
-
+function draw() {
+    noLoop()
+    translate(innerWidth / 2, innerHeight / 2)
+    makeSpiral()
 }

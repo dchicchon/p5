@@ -17,7 +17,6 @@ class WalkingLine {
         this.yEnd = yEnd;
         this.startSide = startSide;
         this.endSide = endSide;
-        // this.type = Math.random() < 0.5 ? 0 : 1;
         this.speed = 2
     }
 
@@ -26,65 +25,32 @@ class WalkingLine {
         strokeWeight(1.5)
         stroke(this.color);
         line(this.xPos, this.yPos, this.xEnd, this.yEnd);
-        // top
+        //top
         if (this.startSide === 0) {
-            // if (this.type) {
-            //     this.xPos += this.speed;
-            // } else {
-            // }
             this.xPos -= this.speed;
         }
         // left
         else if (this.startSide === 1) {
-            // if (this.type) {
-            //     this.yPos -= this.speed;
-            // }
-            // else {
-            // }
             this.yPos += this.speed;
         }
         // bottom
         else if (this.startSide === 2) {
-            // if (this.type) {
-            //     this.xPos -= this.speed;
-            // }
-            // else 
             this.xPos += this.speed;
         }
         // right
         else if (this.startSide === 3) {
-            // if (this.type) {
-            //     this.yPos += this.speed
-            // }
-            // else 
             this.yPos -= this.speed
         }
 
         if (this.endSide === 0) {
-            // if (this.type) {
-            //     this.xEnd += this.speed
-            // }
-            // else 
             this.xEnd -= this.speed
         }
         else if (this.endSide === 1) {
-            // if (this.type) {
-            //     this.yEnd -= this.speed;
-            // }
-            // else 
             this.yEnd += this.speed;
         }
         else if (this.endSide === 2) {
-            // if (this.type) {
-            //     this.xEnd -= this.speed;
-            // }
-            // else 
             this.xEnd += this.speed;
         } else if (this.endSide === 3) {
-            // if (this.type) {
-            //     this.yEnd += this.speed;
-            // }
-            // else 
             this.yEnd -= this.speed;
         }
 
