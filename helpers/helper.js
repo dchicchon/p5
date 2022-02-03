@@ -12,3 +12,11 @@ function recordGIF() {
         }
     }
 }
+
+function inBounds(x, y) {
+    return (x > 0 && x < width && y > 0 && y < height)
+}
+
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}

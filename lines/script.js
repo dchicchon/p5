@@ -1,53 +1,44 @@
 const { innerWidth: width, innerHeight: height } = window;
 
-// make a box somewhere here
-
-let shape;
-let angle;
-let makeTriangles;
-
-// make functions in here;
-// should have a random direction that it is going in
 function inBounds(x, y) {
     return (x > 0 && x < width && y > 0 && y < height)
 }
 
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+let particles = [];
+
+// item must be a multiple of 5
+// make several particles;
 function setup() {
     createCanvas(width, height)
-    shape = new Shape(width / 4, height / 4)
-    angle = radians(60)
     background(0);
-    makeTriangles = async function (xPos, yPos) {
-        if (!inBounds(xPos, yPos)) return;
-        console.log("make triangle")
-        stroke('yellow')
-        let magnitude = 50;
-        let angle = 60;
-        let start = createVector(xPos, yPos);  // starting point
-        let end;
-        let prev;
-        for (let i = 0; i < 3; i++) {
-            // vectorList.push(start);
-            end = p5.Vector.fromAngle(radians(angle), magnitude);
-            end.add(start);
-            line(start.x, start.y, end.x, end.y)
-            angle += 120;
-            prev = start;
-            start = end;
-        }
-        // make a new triangle from here; 
-        // for (let vector of vectorList) {
-            // makeTriangles(vector.x, vector.y)
-        // }
+    let numParticles = floor(height / 20)
+    for (let i = 0; i < numParticles; i++) {
+        // let pos = createVector(1, i * 25 + 1)
+        let pos = createVector(1, i * 15 + 25)
+        let random5 = () => (floor((random(26) / 5)) * 5) + 5
+        // must have a vector that is greater than 1
+        let velocity = createVector(random5(), random5())
+        particles[i] = new Particle(pos, velocity)
     }
-    // angleMode(DEGREES)
 }
 
 function draw() {
-    noLoop();
-    makeTriangles(width / 2, height / 2)
-}
+    for (let particle of particles) {
+        if (particle.bounces >= particle.limit) {
+            particles.splice(particles.indexOf(particle), 1)
+        } else {
+            particle.update();
+            particle.draw();
+        }
+    }
+    // I want a particle to go across the page 
+    // and only go at certain angles
 
+}
 
 
 // make a bunch of shapes that connect with each other
