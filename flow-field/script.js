@@ -2,7 +2,7 @@ const { innerWidth: width, innerHeight: height } = window
 
 let cols, rows;
 const size = 10;
-const scale = 50; // chose scale based on your window size! If its running slow, increase the scale
+const scale = 25; // chose scale based on your window size! If its running slow, increase the scale
 let inc = 0.1;
 
 let particles = []
@@ -14,7 +14,7 @@ function setup() {
     rows = floor(height / scale);
     flowfield = new Array(cols * rows);
     // create the particles here
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 250; i++) {
         let particle = new Particle();
         particles[i] = particle
     }

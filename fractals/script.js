@@ -1,10 +1,11 @@
 let { innerWidth: width, innerHeight: height } = window;
 
-let grid = []
+let grid = [] // 2D Grid
 const gridConstant = 10
 const gridPadding = 5
 const trailLength = 500
 const timingPreference = 10
+const lineWeight = 2
 let numAcross;
 let numDown
 
@@ -49,7 +50,7 @@ function makeGrid() {
 }
 
 async function createFractals(num) {
-    let color = colors(floor(random() * 6), 6)
+    const color = colors(floor(random(6)), 6)
     try {
         if (num % 2 === 0) background(0)
         let x = floor(grid.length / 2.05)
@@ -69,10 +70,6 @@ async function createFractals(num) {
                     let coords = movement(x, y)
                     x = coords[0]
                     y = coords[1]
-                    // console.log('length of gridx:', grid.length)
-                    // console.log('length of gridy:', grid[0].length)
-                    // console.log('xPos:', x)
-                    // console.log('yPos:', y)
                     if (x >= 0 && x < numAcross) {
                         xValid = true
                     } else {
@@ -85,7 +82,6 @@ async function createFractals(num) {
                         console.log("invalid y, run again")
                     }
                 }
-
 
                 let particle = grid[x][y]
                 // check if this point is in the points array
@@ -101,6 +97,7 @@ async function createFractals(num) {
                 let end = points[endIndex]
                 await sleep(timingPreference)
                 stroke(color)
+                strokeWeight(lineWeight)
                 line(start.x, start.y, end.x, end.y)
             }
             points = []
