@@ -52,7 +52,7 @@ function makeGrid() {
 async function createFractals(num) {
     const color = colors(floor(random(6)), 6)
     try {
-        if (num % 2 === 0) background(0)
+
         let x = floor(grid.length / 2.05)
         let y = floor(grid[0].length / 2.0)
         let currentParticle = grid[x][y]
@@ -106,6 +106,11 @@ async function createFractals(num) {
     }
     finally {
         num++
+        if (num % 2 === 0) {
+            console.log("Done!")
+            await sleep(1000 * 10)
+            background(0)
+        }
         createFractals(num)
     }
 
@@ -116,15 +121,6 @@ function draw() {
     background(0)
     // makeGrid()
     let num = 0;
-    // fade in and fade out with new designs!
     createFractals(num)
 
-    // start function that begins drawing triangles from the center
-}
-
-function mousePressed() {
-    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-        let fs = fullscreen();
-        fullscreen(!fs);
-    }
 }

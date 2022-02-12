@@ -4,17 +4,18 @@ function setup() {
     createCanvas(width, height)
 }
 
-const startingX = width / 10 // starting x position
-const startingY = height / 10 // starting y position
-const xNum = 100 // number of lines x
-const yNum = 50 // number of lines y 
-const spacingFactor = 15 // spaces out the lines
-const timingFunction = 5 // changes the timing of making the lines
-const lineThickness = 7 // thickness of lines
-const lineLength = 25 // line length
-const lineIncrement = 2; // determines how much a line grows
-const SLEEP = false; // on/off to see line growth or no growth
-const RANDOM_LENGTH = false; // use random line length
+const startingX = 0 // starting x position
+const startingY = 0 // starting y position
+const xNum = 75 // number of lines x
+const yNum = 36 // number of lines y 
+const spacingFactor = 30 // spaces out the lines
+const timingFunction = 1 // changes the timing of making the lines
+const lineThickness = 10 // thickness of lines
+const lineLengthMax = 100 // line length
+const lineLengthMin = 20;
+const lineIncrement = 10; // determines how much a line grows
+const SLEEP = true; // on/off to see line growth or no growth
+const RANDOM_LENGTH = true; // use random line length
 const LOOP = false // let loop or not
 
 async function draw() {
@@ -24,9 +25,9 @@ async function draw() {
         let xCurrent = (k * spacingFactor) + (startingX); // start from center x
         for (let j = 0; j < yNum; j++) { // col
             let yCurrent = (j * spacingFactor) + (startingY); // start from center y
-            let randomNum = floor(random() * 5) // get random number
+            let randomNum = floor(random() * lineLengthMin) // get random number
             let color = colors(randomNum, 5) // get color
-            let length = RANDOM_LENGTH ? floor((random() * lineLength) + 10) : lineLength // length
+            let length = RANDOM_LENGTH ? floor((random() * lineLengthMax) + 10) : lineLengthMax // length
             if (j % 2 !== 0) { 
                 // make this squiggly by using a sin function?
                 for (let i = 0; i < length; i += lineIncrement) {

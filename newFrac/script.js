@@ -38,8 +38,8 @@ function makeGrid() {
 
 async function drawAlgo() {
     try {
-        let y = floor(yLength / 2)
-        let x = floor(xLength / 2)
+        let y = floor(yLength / 1.5)
+        let x = floor(xLength / 1.5)
         let startingParticle = grid[y][x]
 
         while (true) {
